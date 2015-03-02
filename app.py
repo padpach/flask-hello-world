@@ -1,20 +1,36 @@
 # ---- Flask Hello World ---- #
 
-# Import the Flask class from the flask module
 from flask import Flask
 
-# create the application object
 app = Flask(__name__)
 
-#use los decoradores
-#@app.route("/")
-@app.route("/hello")
 
-# define la vista usando una funcion que regresa una cadena
+@app.route("/test/<search_query>")
+def search(search_query):
+	return search_query
 
-def hello_world():
-	return "Hello, World"
+@app.route("/integer/<int:value>")
+def int_type(value):
+	print value + 1
+	return "correct"
 
-# start the development server using the run() method
+@app.route("/float/<float:value>")
+def float_type(value):
+	print value + 1
+	return "correctamente"
+
+@app.route("/path/<path:value>")
+def path_type(value):
+	print value
+	return "Excelente"
+
+@app.route("/name/<name>")
+def index(name):
+	if name.lower() == "michael" :
+		return "Hola, {}".format(name)
+	else :
+		return "No encontrado", 404
+
+
 if __name__ == "__main__":
 	app.run()
